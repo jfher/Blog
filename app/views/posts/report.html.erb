@@ -1,0 +1,101 @@
+<h1>Report Form</h1>
+
+<html>
+<head>
+  <style type="text/css">
+  body {
+    padding-left: 11em;
+    font-family: Georgia, "Times New Roman",
+          Times, serif;
+    color: white;
+    background-color: #0C6374 }
+  ul.navbar {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 2em;
+    left: 1em;
+    width: 9em }
+  h1 {
+    font-family: Helvetica, Geneva, Arial,
+          SunSans-Regular, sans-serif }
+  ul.navbar li {
+    background: white;
+    margin: 0.5em 0;
+    padding: 0.3em;
+    border-right: 1em solid teal }
+  ul.navbar a {
+    text-decoration: none }
+
+
+  a:link {
+    color: teal }
+  a:visited {
+    color: teal }
+  address {
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: thin dotted }
+  </style>
+</head>
+<body>
+
+<!-- Menú de navegación del sitio -->
+<ul class="navbar">
+  <li><a href="/">Index</a>
+</ul>
+
+<!-- Contenido principal -->
+
+<p>In this view you can see a table with the report all the details of a post.
+<address></address>
+</body>
+</html>
+
+<head>
+<style>
+table, td, th
+{
+border:2px solid white;
+}
+th
+{
+background-color:teal;
+color:white;
+}
+</style>
+</head>
+
+<body>
+<table>
+<tr>
+  <th>Post ID</th>
+  <th>Post Title</th>		
+  <th>Post Created Date</th>
+  <th>Post Updated Date</th>		
+  <th>Number of Reviews</th>
+  <th>Number of Likes</th>		
+  <th>Number of Words</th>
+</tr>
+<tr>
+ <tr>
+  <% @posts.each do |post| %>
+  <th><%=post.id%></th>
+  <th><%=post.title%></th>		
+  <th><%=post.created_at.to_date%></th>
+  <th><%=post.updated_at.to_date%></th>
+  <th><%=post.reviews.length%></th>
+  <th><%=post.like%></th>
+  <th>
+  	    <% res = post.text.gsub(/[^[[:word:]]\s]/,'').split(" ")%>
+      	<%=res.length%>
+  </th>
+ </tr>
+</tr>
+<%end%>
+
+
+</table>
+</body>
+</html>

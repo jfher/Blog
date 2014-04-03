@@ -1,0 +1,131 @@
+<html>
+<head>
+  <style type="text/css">
+  body {
+    padding-left: 11em;
+    font-family: Georgia, "Times New Roman",
+          Times, serif;
+    color: white;
+    background-color: #0C6374 }
+
+  ul.navbar {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 2em;
+    left: 1em;
+    width: 9em }
+  h1 {
+    font-family: Helvetica, Geneva, Arial,
+          SunSans-Regular, sans-serif }
+  ul.navbar li {
+    background: white;
+    margin: 0.5em 0;
+    padding: 0.3em;
+    border-right: 1em solid teal }
+  ul.navbar a {
+    text-decoration: none }
+
+   ul.plike {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: bottom;
+    top: 2em;
+    left: 1em;
+    width: 5em }
+
+  ul.plike li {
+    background: white;
+    margin: 0.5em 0;
+    padding: 0.3em;
+    border-right: 1em solid teal }
+  ul.plike a {
+    text-decoration: none }
+
+
+  a:link {
+    color: teal }
+  a:visited {
+    color: teal }
+  address {
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: thin dotted }
+  </style>
+</head>
+<body>
+
+<!-- Menú de navegación del sitio -->
+<ul class="navbar">
+  <li><a href="/">Index</a>
+</ul>
+
+<!-- Contenido principal -->
+
+<address>
+<form action="/post<%= @post.id ? '/'+@post.id.to_s : '' %>" method="post">
+
+	<h1><%= @post.title %></h1>
+	<br>
+	<textarea readonly rows="4" cols="50" name="post[text]" value="<%= @post.text %>"><%= @post.text %></textarea>
+	<br>
+</form>
+
+<table>
+  <tr></tr>
+ <tr>
+      <ul class ="plike"> 
+         <li><a href="/post/<%= @post.id %>">Like</a>
+      </ul>
+ </tr>
+ <tr>
+   <td>
+   	  <b>Total Likes: </b>
+      <%= @post.like %> 
+   </td>
+ </tr>
+</table>
+<p><em><h1>Reviews</h1></em>
+<table>
+ 
+ <% @post.reviews.each do |review| %>
+   
+   <tr>
+   <td>
+       <%=review.created_at.to_date%>
+  </td>
+   </tr>
+   <tr> 
+     <td>
+      <textarea readonly rows="4" cols="50" name="review[text]" value="<%= review.text %>"><%=review.text%></textarea>
+      </td>
+   </tr>
+   <tr>
+    <td>
+      <ul class ="plike"> 
+         <li><a href="/review/<%= review.id %>">Like</a>
+      </ul>
+      
+    </td>
+    <td>
+       <b>Total Likes:</b>
+        <%=review.like%>
+    </td>
+   </tr>
+ <%end%>
+
+</table>
+
+<p><h1><b>Add a Review....</b></h1>
+
+<%= form_for([@post, @post.reviews.new]) do |f| %>
+ <p> <%= f.text_area :text %> </p>
+<p> <%= f.submit%> </p>
+<%end%>
+
+</address>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<html>
+<head>
+  <title>Welcome to the Blog</title>
+  <style type="text/css">
+  body {
+    padding-left: 11em;
+    font-family: Georgia, "Times New Roman",
+          Times, serif;
+    color: white;
+    background-color: #0C6374 }
+  ul.navbar {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 2em;
+    left: 1em;
+    width: 9em }
+  h1 {
+    font-family: Helvetica, Geneva, Arial,
+          SunSans-Regular, sans-serif }
+  ul.navbar li {
+    background: white;
+    margin: 0.5em 0;
+    padding: 0.3em;
+    border-right: 1em solid teal }
+  ul.navbar a {
+    text-decoration: none }
+  
+   ul.likes {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: bottom;
+    top: 2em;
+    left: 1em;
+    width: 5em }
+
+  ul.likes li {
+    background: white;
+    margin: 0.5em 0;
+    padding: 0.3em;
+    border-right: 1em solid teal }
+  ul.likes a {
+    text-decoration: none }
+
+  
+   ul.name {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: bottom;
+    top: 2em;
+    left: 1em;
+    width: 5em }
+
+   ul.name li {
+    background: white;
+    margin: 0.5em 0;
+    padding: 0.3em;
+    border-right: 0em solid teal }
+  ul.name a {
+    text-decoration: none }
+
+  a:link {
+    color: teal }
+  a:visited {
+    color: teal }
+  address {
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: thin dotted }
+  </style>
+</head>
+<body>
+
+<!-- Menú de navegación del sitio -->
+<ul class="navbar">
+  <li><a href="/posts/new">New Post</a>
+  <li><a href="/post/admi">Administrative Menu</a>
+</ul>
+
+<!-- Contenido principal -->
+<h1>Welcome to the Blog</h1>
+
+<p>¡Welcome to the first blog made in ruby!
+
+<p>Don't has images, but has style.
+
+<p>You can public a post, put a comment on a post, and you can support the post with a like.
+
+<address>
+ <table>
+ <% @posts.each do |post| %>
+    <tr></tr>
+	<tr>
+	   <td>
+	   	<ul class ="name">
+	      	<p><li><a href="/post/show/<%= post.id %>"><%= post.title %></a>
+	   	</ul>
+	   </td>
+	</tr>
+	<tr>
+      <td>
+        <%=post.created_at.to_date%>
+      </td>
+	</tr>
+	<tr>
+	  <td>
+		<textarea readonly rows="4" cols="40" ><%= post.text %></textarea>
+       </td>
+	</tr>
+	<tr>
+      <td>
+        <ul class ="likes"> 
+         <li><a href="/post/<%= post.id %>">Like</a>
+       </ul>
+      </td>
+      <td>
+      	<b>Total Likes: </b>
+         <%= post.like %>
+      </td>
+	</tr>
+  <% end %>
+  <p>
+  </table>
+</address>
+
+</body>
+</html>

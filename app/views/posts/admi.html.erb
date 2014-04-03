@@ -1,0 +1,111 @@
+<html>
+<head>
+  <style type="text/css">
+  body {
+    padding-left: 11em;
+    font-family: Georgia, "Times New Roman",
+          Times, serif;
+    color: white;
+    background-color: #0C6374 }
+
+  ul.navbar {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 2em;
+    left: 1em;
+    width: 9em }
+  h1 {
+    font-family: Helvetica, Geneva, Arial,
+          SunSans-Regular, sans-serif }
+  ul.navbar li {
+    background: white;
+    margin: 0.5em 0;
+    padding: 0.3em;
+    border-right: 1em solid teal }
+  ul.navbar a {
+    text-decoration: none }
+
+
+  ul.pedit li {
+    background: white;
+    margin: 0.5em 0;
+    padding: 0.3em;
+    border-right: 1em solid teal }
+  ul.pedit a {
+    text-decoration: none }
+
+
+  ul.pdelete li {
+    background: white;
+    margin: 0.5em 0;
+    padding: 0.3em;
+    border-right: 1em solid teal }
+  ul.pdelete a {
+    text-decoration: none }
+
+
+  a:link {
+    color: teal }
+  a:visited {
+    color: teal }
+  address {
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: thin dotted }
+  </style>
+</head>
+<body>
+
+<!-- Menú de navegación del sitio -->
+<ul class="navbar">
+  <li><a href="/">Index</a>
+  <li><a href="/post/report">Generate Report</a>
+</ul>
+
+<!-- Contenido principal -->
+<h1>Blog Administrator</h1>
+
+<p>You can edit a post, delete a post, search a post(s) and view a report of all posts in the blog.
+
+<address>
+<table>
+<% @posts.each do |post| %>
+	<tr>
+	  <td>
+	    <%= post.title %>
+	  </td>
+	<td>
+		<textarea readonly rows="4" cols="30" ><%= post.text %></textarea>
+    </td>
+    <td>
+        <b>Likes: </b>
+    </td>
+    <td>
+        <%= post.like %>
+    </td>
+    <td>
+       <ul class ="pedit"> 
+         <li><a href="/post/edit/<%= post.id %>">Edit</a>
+       </ul>
+        
+    </td>
+    <td>
+       <ul class ="pdelete"> 
+         <li><a href="/post/delete/<%= post.id %>">Delete</a>
+       </ul>  
+	</td>
+	</tr>
+<% end %>
+</table>
+<br>
+<h1>Search a post.......</h1>
+<%= form_tag(posts_path, :method => "get", id: "search-form") do %> 
+   <%= text_field_tag :search, params[:search]%> 
+   <button type="submit">Search</button> 
+<% end %>
+</address>
+
+</body>
+</html>
