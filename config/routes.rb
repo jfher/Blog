@@ -1,12 +1,13 @@
 Blog::Application.routes.draw do
   resources :posts do resources :reviews end
-
+  
   get '/posts' => 'posts#index'
   get '/posts/new' => 'posts#new'
   get '/post/admi' => 'posts#admi'
   get '/post/report' => 'posts#report'
   get '/post/:id' => 'posts#like'
   get '/post/edit/:id' => 'posts#edit'
+  get '/post/dislike/:id' => 'posts#dislike'
   post '/post' => 'posts#create'
   post '/post/:id' => 'posts#update'
   get '/post/delete/:id' => 'posts#delete'

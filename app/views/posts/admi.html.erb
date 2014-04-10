@@ -76,7 +76,10 @@
 	  <td>
 	    <%= post.title %>
 	  </td>
-	<td>
+    <td>
+     <input readonly type="text" name="post[category]" value="<%= post.category %>">
+    </td>
+	  <td>
 		<textarea readonly rows="4" cols="30" ><%= post.text %></textarea>
     </td>
     <td>
@@ -100,11 +103,12 @@
 <% end %>
 </table>
 <br>
-<h1>Search a post.......</h1>
+<h1>Search a post by Text or Category.......</h1>
 <%= form_tag(posts_path, :method => "get", id: "search-form") do %> 
    <%= text_field_tag :search, params[:search]%> 
    <button type="submit">Search</button> 
 <% end %>
+<br>
 </address>
 
 </body>

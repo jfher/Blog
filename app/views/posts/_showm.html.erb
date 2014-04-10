@@ -69,6 +69,9 @@
 
 	<h1><%= @post.title %></h1>
 	<br>
+  <p>Category</p>
+  <p><input readonly type="text" name="post[category]" value="<%= @post.category %>">
+  <br>
 	<textarea readonly rows="4" cols="50" name="post[text]" value="<%= @post.text %>"><%= @post.text %></textarea>
 	<br>
 </form>
@@ -79,6 +82,12 @@
       <ul class ="plike"> 
          <li><a href="/post/<%= @post.id %>">Like</a>
       </ul>
+ </tr>
+ <tr>   
+      <ul class ="plike"> 
+         <li><a href="/post/dislike/<%= @post.id %>">Dislike</a>
+      </ul>
+
  </tr>
  <tr>
    <td>

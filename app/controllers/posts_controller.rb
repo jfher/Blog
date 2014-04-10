@@ -25,6 +25,7 @@ class PostsController < ApplicationController
 
 	def like
 		@post = Post.find(params[:id])
+		#@post.like = @post.like? @post.like+1 : 1
 		if @post.like == nil
 		   @post.like = 1
 		   redirect_to '/'
@@ -35,10 +36,26 @@ class PostsController < ApplicationController
 		@post.save
 	end
 
+
+	def dislike
+		@post = Post.find(params[:id])
+		#@post.like = @post.like? @post.like+1 : 1
+		if @post.like > 0 
+		   @post.like = @post.like - 1
+		   redirect_to '/'
+		else
+		 	@post.like = 0
+		 	redirect_to '/' 
+		end
+		@post.save
+	end
+
+
 	def create
 		@post = Post.new
 		@post.title = params[:post][:title]
 		@post.text = params[:post][:text]
+		@post.category = params[:post][:category]
 		@post.like = 0
 
 		if @post.save 
@@ -60,6 +77,7 @@ class PostsController < ApplicationController
 		@post = Post.find(params[:id])
 		@post.title = params[:post][:title]
 		@post.text = params[:post][:text]
+		@post.category = params[:post][:category]
 		
 
         if  @post.like == 0 ||  @post.like == nil
@@ -81,7 +99,8 @@ class PostsController < ApplicationController
         redirect_to '/post/admi', notice: 'The post has been deleted sucesfully'
 	end
     
-    def  search
+    def search
     	@posts = Post.search(params[:search_text])
     end
+
 end

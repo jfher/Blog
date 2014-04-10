@@ -105,15 +105,26 @@
         <%=post.created_at.to_date%>
       </td>
 	</tr>
+  <tr>
+     <td>
+      <p>Category</p>
+     <input readonly type="text" name="post[category]" value="<%= post.category %>">
+    </td>
+  </tr>
 	<tr>
 	  <td>
 		<textarea readonly rows="4" cols="40" ><%= post.text %></textarea>
-       </td>
+    </td>
 	</tr>
 	<tr>
       <td>
         <ul class ="likes"> 
          <li><a href="/post/<%= post.id %>">Like</a>
+       </ul>
+      </td>
+      <td>
+        <ul class ="likes"> 
+         <li><a href="/post/dislike/<%= post.id %>">Dislike</a>
        </ul>
       </td>
       <td>
